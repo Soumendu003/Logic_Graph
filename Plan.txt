@@ -1,0 +1,49 @@
+
+
+All aliases, wire, ff, ldn, lut are vertices
+
+assign statements  and the connection ports of the ff and ldn and lut creates the edges.
+
+
+Whenever we get and .O or .Q port, 
+
+    It may happen, that port signal is already declared or defined.
+
+    Or, It is getting declared as well as defined first time. 
+
+    Solution:
+
+        We put the check-declaration flag True for add_edge function.
+
+        By doing this, we Instruct add_edge to check whether any previous declaration is present or not.
+
+        First we check is it present in Wire Dictionary.
+
+            If present, we add a source of that Wire (Source, Source_port)
+
+        Then we check is it present in Collection Dictionary.
+
+            If present, LOG multiple source
+
+            Else we add it to the Collection with {key = Signal_Name : value = (Source , Source_port)}
+
+
+** When Drawing the circuit, if a node is lut type then any out-port will be labelled as ".O"
+                                          ldn or ff type then and out-port will be labelled as ".Q"
+
+
+
+
+####Collection Size  is getting bigger than total number of command processed
+** fix it
+
+
+What to do with this .RD0
+
+
+** Plan for Handling Wires **
+
+We should keep a different Dictionary for each wire.
+
+Whenever we get a edge from that wire to anywhere else, we put that information in the dictionary.
+When we get a ingoing edge to that wire, we add those nodes in the dictionary with the ingoing source.
